@@ -12,16 +12,15 @@ import  javax.servlet.http.HttpServletResponse;
 
 import com.ron.todoList.TodoService;
 
-@WebServlet(urlPatterns = "/login.do")  
+@WebServlet(urlPatterns = "/login.do")  //new in servlet notations to redirect action name
 
 public class LoginServlet extends HttpServlet {
 	
-	private LoginService userValidationService=new LoginService();
+	private LoginService userValidationService=new LoginService(); //object to use classes
 	private TodoService todoService=new TodoService();
 	
 	  protected void doGet(HttpServletRequest request, HttpServletResponse response)  
 			  throws ServletException, IOException {
-		 PrintWriter out= response.getWriter();
 		 request.getRequestDispatcher("/WEB-INF/view/Login.jsp").forward(request, response);
 		  
 	  }
@@ -36,7 +35,7 @@ public class LoginServlet extends HttpServlet {
 		 
 		 if(isUserValid) {
 			 request.getSession().setAttribute("name", name);
-			response.sendRedirect("/todo.do");
+			response.sendRedirect("/list-todos.do");
 		 }
 		 else {
 			 request.setAttribute("errorMessage", "Invalid Credentials");

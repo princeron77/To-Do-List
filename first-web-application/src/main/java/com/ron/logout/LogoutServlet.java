@@ -1,4 +1,4 @@
-package com.ron.todoList;
+package com.ron.logout;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,17 +12,16 @@ import  javax.servlet.http.HttpServletResponse;
 
 import com.ron.todoList.TodoService;
 
-@WebServlet(urlPatterns = "/delete-todo.do")  
+@WebServlet(urlPatterns = "/logout.do")  
 
-public class DeleteTodoServlet extends HttpServlet {
-	
-	private TodoService todoService=new TodoService();
+public class LogoutServlet extends HttpServlet {
 	
 	  protected void doGet(HttpServletRequest request, HttpServletResponse response)  
 			  throws ServletException, IOException {
-		 todoService.deleteTodo(new Todo(request.getParameter("todo"),request.getParameter("category")));
-		 response.sendRedirect("/list-todos.do");
-		  
+		  request.getSession().invalidate();
+		 request.getRequestDispatcher("/WEB-INF/view/Login.jsp").forward(request, response);
+		    
 	  }
+
 	
 }
